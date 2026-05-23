@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akupunktur Nina Jombang - Solusi Kesehatan & Kecantikan Alami</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pri: '#FAF7F2', 
+                        sec: '#4A3728', 
+                        thr: '#8B5E3C', 
+                        whatsapp: '#25D366',
+                        instagram: '#E4405F',
+                        tiktok: '#000000'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .service-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .service-card:hover { transform: translateY(-10px); }
+        
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+        .modal-box { background: white; width: 100%; max-width: 650px; border-radius: 24px; overflow: hidden; animation: slideUp 0.3s ease-out; max-height: 90vh; display: flex; flex-direction: column; }
+        
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .slide.active { opacity: 1; }
+
+        .social-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1.25rem;
+        }
+        .social-circle:hover { transform: scale(1.1); background-color: rgba(255,255,255,0.2); }
+
+        .service-option-checkbox {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: #ffffff;
+            user-select: none;
+        }
+        .service-option-checkbox:hover { border-color: #8B5E3C; background-color: #FAF7F2; }
+        .service-option-checkbox.selected { border-color: #4A3728; background-color: #FAF7F2; }
+
+        .dot-status {
+            width: 8px;
+            height: 8px;
+            background-color: #8B5E3C;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .icon-box {
+            width: 64px;
+            height: 64px;
+            background: #8B5E3C15;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: #8B5E3C;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .service-card:hover .icon-box {
+            background: #8B5E3C;
+            color: white;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-pri font-sans text-sec overflow-x-hidden">
+
+    <!-- Navigasi -->
+    <nav class="sticky top-0 bg-white/95 backdrop-blur-md z-40 border-b border-sec/10 shadow-sm">
+        <div class="container mx-auto px-4 lg:px-8 flex justify-between items-center h-[90px]">
+            <a href="#beranda" class="flex items-center gap-4 group">
+                <!-- Ilustrasi SVG Logo Wajah & Jarum -->
+                <div class="h-12 w-12 md:h-14 md:w-14 group-hover:scale-105 transition-transform duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="h-full w-full text-sec" stroke="currentColor">
+                        <!-- Lingkaran Luar -->
+                        <circle cx="50" cy="50" r="46" fill="none" stroke-width="2.5"/>
+                        <!-- Jarum Akupunktur -->
+                        <line x1="38" y1="22" x2="38" y2="80" stroke-width="2.5" stroke-linecap="round"/>
+                        <circle cx="38" cy="19" r="2.5" fill="currentColor" stroke="none"/>
+                        <!-- Siluet Wajah (Garis Rambut/Belakang) -->
+                        <path d="M 52 20 C 38 30 38 60 45 80" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+                        <!-- Siluet Wajah (Profil Depan) -->
+                        <path d="M 52 20 C 65 20 68 32 68 40 C 68 42 74 45 70 48 C 70 48 73 52 68 54 C 68 54 70 58 62 62 C 55 65 55 70 52 80" fill="none" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+                        <!-- Mata & Alis -->
+                        <path d="M 55 34 Q 60 32 65 34" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M 56 40 Q 60 42 64 40" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+                        <!-- Daun-daun -->
+                        <path d="M 38 68 Q 28 58 20 65 Q 28 75 38 68" fill="none" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M 40 60 Q 48 45 55 55 Q 48 68 40 60" fill="none" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M 45 75 Q 58 68 65 78 Q 55 85 45 75" fill="none" stroke-width="2" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h1 class="font-extrabold text-xl lg:text-2xl tracking-tight text-sec hidden sm:block font-serif">NIN.ACUTHERAPY</h1>
+            </a>
+
+            <div class="hidden xl:flex gap-8 font-bold text-sec/70 text-sm uppercase tracking-widest">
+                <a href="#beranda" class="hover:text-thr transition-colors">Beranda</a>
+                <a href="#layanan" class="hover:text-thr transition-colors">Layanan</a>
+                <a href="#kontak" class="hover:text-thr transition-colors">Kontak</a>
+            </div>
+
+            <button onclick="openBooking()" class="bg-sec text-white px-6 py-3 rounded-full font-bold text-sm hover:bg-thr transition-all shadow-lg hidden md:block">
+                Reservasi Sekarang
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="relative py-16 lg:py-24 overflow-hidden">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+                <div class="lg:w-1/2 space-y-8 text-center lg:text-left">
+                    <div class="inline-flex items-center px-4 py-2 bg-thr/10 text-thr rounded-full text-xs font-bold uppercase tracking-widest">
+                        <span class="dot-status animate-pulse"></span> Klinik Spesialis Akupunktur Jombang
+                    </div>
+                    <h2 class="text-5xl lg:text-7xl font-extrabold leading-tight">Pulihkan <span class="text-thr italic">Kesehatan</span> & Pancarkan <span class="text-thr italic">Kecantikan</span></h2>
+                    <p class="text-lg text-sec/70 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                        Kami menghadirkan terapi akupunktur medis profesional untuk membantu Anda mencapai keseimbangan tubuh dan kulit yang sehat bercahaya secara alami.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <button onclick="openBooking()" class="bg-sec text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-thr transition-all shadow-xl">Daftar Sekarang</button>
+                        <a href="#layanan" class="border-2 border-sec/20 text-sec px-10 py-5 rounded-2xl font-bold text-lg hover:bg-sec hover:text-white transition-all text-center flex items-center justify-center">Lihat Layanan</a>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 w-full">
+                    <div class="slider-container" id="heroSlider">
+                        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1594411133912-32a76f23ae6c?q=80&w=1000&auto=format&fit=crop');"></div>
+                        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=1000&auto=format&fit=crop');"></div>
+                        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=1000&auto=format&fit=crop');"></div>
+                        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1000&auto=format&fit=crop');"></div>
+                        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1000&auto=format&fit=crop');"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Layanan Kami -->
+    <section id="layanan" class="py-24 bg-white">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <h3 class="text-4xl font-bold mb-6 text-sec">Layanan Unggulan Kami</h3>
+                <p class="text-sec/60 text-lg">Kami menyediakan berbagai terapi medis dan kecantikan yang disesuaikan dengan kebutuhan kesehatan Anda.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Kesehatan -->
+                <div onclick="showServiceDetail('kesehatan')" class="service-card group cursor-pointer bg-pri p-8 rounded-[40px] border border-sec/5 flex flex-col justify-between h-full">
+                    <div>
+                        <div class="icon-box">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4 text-sec">Akupunktur Kesehatan</h4>
+                        <p class="text-sm text-sec/60 mb-8 leading-relaxed">Terapi medis untuk menyeimbangkan tubuh dan sirkulasi energi melalui titik-titik akupunktur...</p>
+                    </div>
+                    <span class="text-thr font-bold text-sm uppercase tracking-widest flex items-center gap-2 mt-auto">
+                        Lihat Detail <i class="fas fa-chevron-right text-[10px]"></i>
+                    </span>
+                </div>
+
+                <!-- Kecantikan -->
+                <div onclick="showServiceDetail('kecantikan')" class="service-card group cursor-pointer bg-pri p-8 rounded-[40px] border border-sec/5 flex flex-col justify-between h-full">
+                    <div>
+                        <div class="icon-box">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4 text-sec">Akupunktur Kecantikan</h4>
+                        <p class="text-sm text-sec/60 mb-8 leading-relaxed">Perawatan kulit alami dari dalam untuk merangsang kolagen dan mencerahkan wajah...</p>
+                    </div>
+                    <span class="text-thr font-bold text-sm uppercase tracking-widest flex items-center gap-2 mt-auto">
+                        Lihat Detail <i class="fas fa-chevron-right text-[10px]"></i>
+                    </span>
+                </div>
+
+                <!-- Facelift -->
+                <div onclick="showServiceDetail('facelift')" class="service-card group cursor-pointer bg-pri p-8 rounded-[40px] border border-sec/5 flex flex-col justify-between h-full">
+                    <div>
+                        <div class="icon-box">
+                            <i class="fa-solid fa-face-smile-beam"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4 text-sec">Facelift Akupunktur</h4>
+                        <p class="text-sm text-sec/60 mb-8 leading-relaxed">Teknik pengencangan wajah alami tanpa operasi untuk hasil yang lebih kencang dan awet muda...</p>
+                    </div>
+                    <span class="text-thr font-bold text-sm uppercase tracking-widest flex items-center gap-2 mt-auto">
+                        Lihat Detail <i class="fas fa-chevron-right text-[10px]"></i>
+                    </span>
+                </div>
+
+                <!-- Bekam -->
+                <div onclick="showServiceDetail('bekam')" class="service-card group cursor-pointer bg-pri p-8 rounded-[40px] border border-sec/5 flex flex-col justify-between h-full">
+                    <div>
+                        <div class="icon-box">
+                            <i class="fa-solid fa-fire-burner"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4 text-sec">Bekam Kesehatan</h4>
+                        <p class="text-sm text-sec/60 mb-8 leading-relaxed">Terapi detoksifikasi untuk melancarkan sirkulasi darah dan membuang racun dalam tubuh...</p>
+                    </div>
+                    <span class="text-thr font-bold text-sm uppercase tracking-widest flex items-center gap-2 mt-auto">
+                        Lihat Detail <i class="fas fa-chevron-right text-[10px]"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="kontak" class="bg-sec text-pri/70 pt-20 pb-12 px-4">
+        <div class="container mx-auto max-w-7xl">
+            <div class="grid lg:grid-cols-4 gap-12 mb-16">
+                <div class="space-y-6">
+                    <div class="flex items-center gap-4">
+                        <!-- SVG Logo di Footer -->
+                        <div class="h-16 w-16 bg-pri rounded-2xl border border-white/20 shadow-lg flex items-center justify-center p-2 text-sec shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="h-full w-full" stroke="currentColor">
+                                <circle cx="50" cy="50" r="46" fill="none" stroke-width="2.5"/>
+                                <line x1="38" y1="22" x2="38" y2="80" stroke-width="2.5" stroke-linecap="round"/>
+                                <circle cx="38" cy="19" r="2.5" fill="currentColor" stroke="none"/>
+                                <path d="M 52 20 C 38 30 38 60 45 80" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+                                <path d="M 52 20 C 65 20 68 32 68 40 C 68 42 74 45 70 48 C 70 48 73 52 68 54 C 68 54 70 58 62 62 C 55 65 55 70 52 80" fill="none" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+                                <path d="M 55 34 Q 60 32 65 34" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+                                <path d="M 56 40 Q 60 42 64 40" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+                                <path d="M 38 68 Q 28 58 20 65 Q 28 75 38 68" fill="none" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M 40 60 Q 48 45 55 55 Q 48 68 40 60" fill="none" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M 45 75 Q 58 68 65 78 Q 55 85 45 75" fill="none" stroke-width="2" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <span class="text-white font-extrabold text-xl leading-tight font-serif">NIN.ACUTHERAPY<br><span class="text-sm font-sans font-normal text-pri/70">Jombang</span></span>
+                    </div>
+                    <p class="text-sm leading-relaxed text-pri/50">
+                        Menghadirkan harmoni kesehatan dan kecantikan alami melalui teknik akupunktur medis profesional di Jombang.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h5 class="text-white font-bold uppercase text-xs tracking-widest">Lokasi Klinik</h5>
+                    <p class="text-sm">Perum Puri Astapada Indah 2 Blok E.16 Plosogeneng, Kec. Jombang, Kabupaten Jombang, Jawa Timur</p>
+                    <a href="https://maps.app.goo.gl/iVmN1LboUGQS9Wq4A" target="_blank" class="text-thr text-xs font-bold hover:underline uppercase tracking-wider block mt-2">LIHAT GOOGLE MAPS <i class="fa-solid fa-up-right-from-square ml-1 text-[10px]"></i></a>
+                </div>
+
+                <div class="space-y-8">
+                    <div>
+                        <h5 class="text-white font-bold uppercase text-xs tracking-widest mb-4">Jam Operasional</h5>
+                        <ul class="text-sm space-y-2">
+                            <li class="flex justify-between"><span>Senin - Sabtu:</span><span class="text-white font-semibold">08:00 - 17:00</span></li>
+                            <li class="flex justify-between text-red-400"><span>Minggu:</span><span>Tutup</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-white font-bold uppercase text-xs tracking-widest mb-4">Temukan Kami</h5>
+                        <div class="flex gap-4">
+                            <a href="https://wa.me/6282245754145" target="_blank" class="social-circle bg-whatsapp">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                            <a href="https://www.instagram.com/nin.acutherapy.jombang/" target="_blank" class="social-circle bg-instagram">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@nin.acutherapy" target="_blank" class="social-circle bg-tiktok">
+                                <i class="fa-brands fa-tiktok"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h5 class="text-white font-bold uppercase text-xs tracking-widest">Hubungi Kami</h5>
+                    <div class="space-y-3">
+                        <a href="tel:082245754145" class="flex items-center gap-3 text-sm hover:text-white group">
+                            <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-thr transition-colors"><i class="fas fa-phone-alt text-thr group-hover:text-white text-xs"></i></span> 
+                            0822-4575-4145 (Call)
+                        </a>
+                        <a href="https://wa.me/6282245754145" target="_blank" class="flex items-center gap-3 text-sm hover:text-white group">
+                            <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-whatsapp transition-colors"><i class="fab fa-whatsapp text-thr group-hover:text-white text-xs"></i></span> 
+                            0822-4575-4145 (WhatsApp)
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-white/5 text-center">
+                <p class="text-[10px] uppercase tracking-[0.3em] font-bold text-pri/30">
+                    &copy; 2024 Akupunktur Nina Jombang. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Detail Layanan -->
+    <div id="serviceModal" class="modal-overlay" onclick="if(event.target === this) closeServiceModal()">
+        <div class="modal-box">
+            <div id="serviceModalHeader" class="bg-sec p-6 text-white flex justify-between items-center shrink-0">
+                <h4 id="serviceTitle" class="text-xl font-bold">Detail Layanan</h4>
+                <button onclick="closeServiceModal()" class="text-white/40 hover:text-white transition-colors cursor-pointer"><i class="fas fa-times text-2xl"></i></button>
+            </div>
+            <div id="serviceContent" class="p-8 space-y-6 text-sec overflow-y-auto">
+                <!-- Content injected by JS -->
+            </div>
+            <div class="p-8 pt-0 shrink-0">
+                <button onclick="closeServiceModal(); openBooking();" class="w-full bg-sec text-white py-4 rounded-2xl font-bold hover:bg-thr transition-all cursor-pointer">Pesan Layanan Ini</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CHECKOUT WIZARD MODAL -->
+    <div id="reservationModal" class="modal-overlay" onclick="if(event.target === this) closeModal()">
+        <div class="modal-box h-[90vh]">
+            <!-- Header -->
+            <div class="bg-sec p-5 text-white flex justify-between items-center shrink-0">
+                <div>
+                    <h4 class="text-xl font-bold">Reservasi & Pemesanan</h4>
+                    <p class="text-xs text-pri/70">Pilih layanan, jadwalkan, dan checkout</p>
+                </div>
+                <button onclick="closeModal()" class="text-white/40 hover:text-white transition-colors cursor-pointer"><i class="fas fa-times text-2xl"></i></button>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="bg-pri px-6 py-4 border-b border-sec/5 flex justify-between items-center text-xs font-semibold shrink-0">
+                <div class="flex items-center gap-2" id="stepIndicator1">
+                    <span class="w-6 h-6 rounded-full bg-sec text-white flex items-center justify-center">1</span>
+                    <span class="text-sec hidden sm:inline">Pilih Layanan</span>
+                </div>
+                <div class="h-[2px] bg-sec/10 flex-1 mx-2"></div>
+                <div class="flex items-center gap-2 text-sec/40" id="stepIndicator2">
+                    <span class="w-6 h-6 rounded-full bg-sec/15 text-sec/40 flex items-center justify-center">2</span>
+                    <span class="hidden sm:inline">Jadwal & Data</span>
+                </div>
+                <div class="h-[2px] bg-sec/10 flex-1 mx-2"></div>
+                <div class="flex items-center gap-2 text-sec/40" id="stepIndicator3">
+                    <span class="w-6 h-6 rounded-full bg-sec/15 text-sec/40 flex items-center justify-center">3</span>
+                    <span class="hidden sm:inline">Pembayaran</span>
+                </div>
+            </div>
+
+            <!-- Content Area (Scrollable) -->
+            <div class="flex-1 overflow-y-auto p-6 space-y-6 bg-white">
+                
+                <!-- STEP 1: PILIH LAYANAN -->
+                <div id="checkoutStep1" class="space-y-4">
+                    <h5 class="text-sm font-bold text-sec uppercase tracking-widest mb-1">Pilih Terapi yang Dibutuhkan</h5>
+                    <p class="text-xs text-sec/60">Kakak dapat mencentang lebih dari satu layanan.</p>
+                    
+                    <div class="space-y-3">
+                        <div class="service-option-checkbox" id="checkOptKesehatan" onclick="toggleOption('Kesehatan', 150000)">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="chkKesehatan" class="hidden">
+                                <div class="w-5 h-5 border-2 border-sec/30 rounded flex items-center justify-center text-white text-xs" id="chkBoxIndicatorKesehatan">
+                                    <i class="fa-solid fa-check text-[10px] hidden" id="chkCheckKesehatan"></i>
+                                </div>
+                                <div class="text-left">
+                                    <span class="block text-sm font-bold text-sec">Akupunktur Kesehatan</span>
+                                    <span class="text-xs text-sec/60">Terapi seimbang tubuh & saraf</span>
+                                </div>
+                            </div>
+                            <span class="font-bold text-sm text-thr">Rp 150.000</span>
+                        </div>
+
+                        <div class="service-option-checkbox" id="checkOptKecantikan" onclick="toggleOption('Kecantikan', 175000)">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="chkKecantikan" class="hidden">
+                                <div class="w-5 h-5 border-2 border-sec/30 rounded flex items-center justify-center text-white text-xs" id="chkBoxIndicatorKecantikan">
+                                    <i class="fa-solid fa-check text-[10px] hidden" id="chkCheckKecantikan"></i>
+                                </div>
+                                <div class="text-left">
+                                    <span class="block text-sm font-bold text-sec">Akupunktur Kecantikan</span>
+                                    <span class="text-xs text-sec/60">Regenerasi sel & glowing alami</span>
+                                </div>
+                            </div>
+                            <span class="font-bold text-sm text-thr">Rp 175.000</span>
+                        </div>
+
+                        <div class="service-option-checkbox" id="checkOptFacelift" onclick="toggleOption('Facelift', 200000)">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="chkFacelift" class="hidden">
+                                <div class="w-5 h-5 border-2 border-sec/30 rounded flex items-center justify-center text-white text-xs" id="chkBoxIndicatorFacelift">
+                                    <i class="fa-solid fa-check text-[10px] hidden" id="chkCheckFacelift"></i>
+                                </div>
+                                <div class="text-left">
+                                    <span class="block text-sm font-bold text-sec">Facelift Akupunktur</span>
+                                    <span class="text-xs text-sec/60">Pengencangan wajah tanpa operasi</span>
+                                </div>
+                            </div>
+                            <span class="font-bold text-sm text-thr">Rp 200.000</span>
+                        </div>
+
+                        <div class="service-option-checkbox" id="checkOptBekam" onclick="toggleOption('Bekam', 120000)">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="chkBekam" class="hidden">
+                                <div class="w-5 h-5 border-2 border-sec/30 rounded flex items-center justify-center text-white text-xs" id="chkBoxIndicatorBekam">
+                                    <i class="fa-solid fa-check text-[10px] hidden" id="chkCheckBekam"></i>
+                                </div>
+                                <div class="text-left">
+                                    <span class="block text-sm font-bold text-sec">Bekam Kesehatan</span>
+                                    <span class="text-xs text-sec/60">Detoksifikasi & lancarkan darah</span>
+                                </div>
+                            </div>
+                            <span class="font-bold text-sm text-thr">Rp 120.000</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-pri p-4 rounded-xl border border-sec/5 flex justify-between items-center mt-6">
+                        <span class="text-sm font-semibold text-sec/70">Subtotal Pesanan:</span>
+                        <span class="text-xl font-extrabold text-sec" id="checkoutSubtotal">Rp 0</span>
+                    </div>
+                </div>
+
+                <!-- STEP 2: ISI FORM & JADWAL -->
+                <div id="checkoutStep2" class="space-y-4 hidden">
+                    <h5 class="text-sm font-bold text-sec uppercase tracking-widest mb-2">Informasi Pasien & Jadwal Kunjungan</h5>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-sec/60 uppercase mb-2">Nama Lengkap Pasien</label>
+                            <input type="text" id="custNama" placeholder="Contoh: Budi Santoso" class="w-full border border-sec/15 rounded-xl px-4 py-3 bg-pri/20 focus:outline-none focus:border-thr text-sec">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-xs font-bold text-sec/60 uppercase mb-2">Nomor WhatsApp Aktif</label>
+                            <input type="tel" id="custTelp" placeholder="Contoh: 08123456789" class="w-full border border-sec/15 rounded-xl px-4 py-3 bg-pri/20 focus:outline-none focus:border-thr text-sec">
+                            <span class="text-[10px] text-sec/50 mt-1 block">Konfirmasi pesanan akan dikirim ke nomor ini</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-sec/60 uppercase mb-2">Pilih Tanggal</label>
+                                <input type="date" id="custTanggal" class="w-full border border-sec/15 rounded-xl px-4 py-3 bg-pri/20 focus:outline-none focus:border-thr text-sec">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-sec/60 uppercase mb-2">Pilih Slot Sesi / Jam</label>
+                                <select id="custJam" class="w-full border border-sec/15 rounded-xl px-4 py-3 bg-white focus:outline-none focus:border-thr text-sec">
+                                    <option value="">-- Pilih Sesi --</option>
+                                    <option value="Sesi 1 (Pagi) - 08.00 WIB">Sesi 1 - 08.00 WIB</option>
+                                    <option value="Sesi 2 (Pagi) - 09.30 WIB">Sesi 2 - 09.30 WIB</option>
+                                    <option value="Sesi 3 (Siang) - 11.00 WIB">Sesi 3 - 11.00 WIB</option>
+                                    <option value="Sesi 4 (Siang) - 13.00 WIB">Sesi 4 - 13.00 WIB</option>
+                                    <option value="Sesi 5 (Sore) - 14.30 WIB">Sesi 5 - 14.30 WIB</option>
+                                    <option value="Sesi 6 (Sore) - 16.00 WIB">Sesi 6 - 16.00 WIB</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="bg-thr/10 p-3.5 rounded-xl border border-thr/20 flex gap-2.5 items-start text-xs text-thr leading-relaxed mt-2">
+                            <i class="fa-solid fa-circle-info mt-0.5 shrink-0 text-thr"></i>
+                            <p><strong>Perhatian:</strong> Jadwal kunjungan dapat berubah atau di-reschedule sewaktu-waktu tergantung ketersediaan slot. Kami akan mengonfirmasi ulang kecocokan jadwal Kakak via WhatsApp.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 3: PEMBAYARAN -->
+                <div id="checkoutStep3" class="space-y-4 hidden">
+                    <h5 class="text-sm font-bold text-sec uppercase tracking-widest mb-1">Pilih Metode Pembayaran</h5>
+                    <p class="text-xs text-sec/60">Tentukan cara pembayaran untuk pesanan terapi Kakak.</p>
+                    
+                    <div class="space-y-4">
+                        <!-- BCA -->
+                        <div class="border border-sec/10 rounded-2xl p-4 bg-white space-y-3">
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="radio" name="payment_method" value="Transfer Bank BCA" checked onclick="togglePaymentDetail('transfer')" class="w-4 h-4 accent-sec">
+                                <span class="text-sm font-bold text-sec">Transfer Bank BCA (Cepat)</span>
+                            </label>
+                            
+                            <div id="paymentTransferDetail" class="pl-7 pt-2 space-y-3 border-t border-sec/5 text-xs text-sec/80">
+                                <p>Lakukan transfer sesuai total pemesanan ke rekening berikut:</p>
+                                <div class="bg-pri p-3.5 rounded-xl border border-sec/5">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <span class="block font-bold text-sec">Bank BCA</span>
+                                            <span class="text-sm font-mono font-bold text-sec">1131834964</span>
+                                            <span class="block text-[10px] text-thr font-bold italic mt-0.5">a.n. NISRINA LAM'A</span>
+                                        </div>
+                                        <button onclick="copyToClipboard('1131834964')" class="bg-sec text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-bold hover:bg-thr cursor-pointer transition-colors shadow-sm">Salin</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Klinik -->
+                        <div class="border border-sec/10 rounded-2xl p-4 bg-white">
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="radio" name="payment_method" value="Bayar di Tempat (Klinik)" onclick="togglePaymentDetail('onsite')" class="w-4 h-4 accent-sec">
+                                <span class="text-sm font-bold text-sec">Bayar di Tempat (Klinik)</span>
+                            </label>
+                            <p id="paymentOnsiteDetail" class="hidden pl-7 pt-2 text-xs text-sec/60 border-t border-sec/5 mt-3">
+                                Kakak dapat melakukan pembayaran langsung secara Tunai/Transfer setelah selesai melakukan terapi di klinik.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 4: RINGKASAN -->
+                <div id="checkoutStep4" class="space-y-4 hidden">
+                    <div class="text-center py-4">
+                        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xl mx-auto mb-3">
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                        </div>
+                        <h5 class="text-lg font-bold text-sec">Ringkasan Pemesanan</h5>
+                        <p class="text-xs text-sec/60">Tinjau pesanan dan kirim ke WhatsApp admin kami.</p>
+                    </div>
+
+                    <div class="border-2 border-dashed border-sec/20 p-5 rounded-2xl bg-pri/30 space-y-4 text-xs font-mono" id="digitalInvoiceArea">
+                        <div class="text-center border-b border-sec/10 pb-3 space-y-1">
+                            <h6 class="font-extrabold text-sm uppercase tracking-wider text-sec">AKUPUNKTUR NINA JOMBANG</h6>
+                        </div>
+                        
+                        <div class="space-y-2 text-sec/80">
+                            <p><span class="inline-block w-20">Pasien</span>: <strong id="invNama"></strong></p>
+                            <p><span class="inline-block w-20">WhatsApp</span>: <span id="invTelp"></span></p>
+                            <p><span class="inline-block w-20">Jadwal</span>: <strong id="invJadwal"></strong></p>
+                            <p><span class="inline-block w-20">Metode</span>: <span id="invMetode"></span></p>
+                        </div>
+
+                        <div class="border-t border-b border-sec/10 py-3 space-y-2" id="invServicesList">
+                            <!-- Items -->
+                        </div>
+
+                        <div class="flex justify-between items-center text-sm font-bold text-sec border-b border-sec/10 pb-3">
+                            <span>TOTAL</span>
+                            <span id="invTotal"></span>
+                        </div>
+                        
+                        <div class="text-[10px] text-thr leading-relaxed italic pt-1 text-center bg-thr/5 p-2 rounded-lg">
+                            *Jadwal di atas dapat berubah/di-reschedule sewaktu-waktu tergantung ketersediaan slot. Tunggu konfirmasi admin.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer Buttons -->
+            <div class="bg-pri p-5 border-t border-sec/10 flex justify-between gap-4 shrink-0">
+                <button id="btnPrev" onclick="prevStep()" class="border border-sec/30 text-sec font-bold py-3.5 px-6 rounded-xl hover:bg-sec/5 text-sm uppercase transition-all hidden cursor-pointer">Kembali</button>
+                <button id="btnNext" onclick="nextStep()" class="flex-1 bg-sec text-white font-bold py-3.5 px-6 rounded-xl hover:bg-thr text-sm uppercase tracking-wider shadow-md transition-all cursor-pointer">Lanjutkan</button>
+                <button id="btnSubmit" onclick="submitBooking()" class="flex-1 bg-whatsapp text-white font-bold py-3.5 px-6 rounded-xl hover:bg-green-600 text-sm uppercase tracking-wider shadow-md transition-all hidden flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Kirim ke WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Rincian Layanan & Tarif
+        const serviceData = {
+            kesehatan: {
+                title: "Akupunktur Kesehatan",
+                price: 150000,
+                desc: "Terapi akupunktur medis untuk menyeimbangkan tubuh, meningkatkan sirkulasi energi, dan mendukung pemulihan alami.",
+                keluhan: [
+                    "Nyeri otot & sendi (lutut, bahu, pinggang)",
+                    "Keluhan saraf (kesemutan, kebas/baal)",
+                    "Pemulihan post stroke",
+                    "Sakit kepala, migrain, vertigo",
+                    "Gangguan tidur / insomnia",
+                    "Bell's palsy",
+                    "Gangguan pencernaan"
+                ],
+                notes: "*aman, steril, profesional"
+            },
+            kecantikan: {
+                title: "Akupunktur Kecantikan",
+                price: 175000,
+                desc: "Perawatan kecantikan alami dengan teknik akupunktur untuk membantu memperbaiki penampilan kulit dari dalam. Membantu melancarkan sirkulasi darah, merangsang produksi kolagen, serta merangsang regenerasi kulit secara alami.",
+                keluhan: [
+                    "Kulit kusam & tidak bercahaya",
+                    "Garis halus & kerutan",
+                    "Kulit kendur/kurang kencang",
+                    "Jerawat & bekas jerawat/bopeng",
+                    "Pori-pori tampak besar"
+                ],
+                notes: "*alami, non bedah, tanpa bahan kimia"
+            },
+            facelift: {
+                title: "Facelift Akupunktur",
+                price: 200000,
+                desc: "Perawatan wajah alami dengan teknik akupunktur untuk membantu mengencangkan kulit, meningkatkan elastisitas, melancarkan sirkulasi darah, dan merangsang produksi kolagen.",
+                keluhan: [
+                    "Wajah tampak lelah",
+                    "Garis halus penuaan",
+                    "Kulit wajah kendur",
+                    "Sirkulasi wajah tidak lancar"
+                ],
+                notes: "*tanpa operasi & tanpa bahan kimia"
+            },
+            bekam: {
+                title: "Bekam Kesehatan",
+                price: 120000,
+                desc: "Terapi tradisional medis untuk membantu detoksifikasi tubuh, melancarkan sirkulasi darah, dan menjaga keseimbangan kesehatan secara menyeluruh.",
+                keluhan: [
+                    "Pegal & nyeri otot",
+                    "Masuk angin & kelelahan"
+                ],
+                notes: "*aman higienis, profesional"
+            }
+        };
+
+        // Slider Image Logic
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        setInterval(() => {
+            if(slides.length > 0) {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+        }, 3000);
+
+        // =====================================
+        // CHECKOUT & RESERVATION WIZARD LOGIC
+        // =====================================
+        let currentWizardStep = 1;
+        let selectedLayanan = {};
+        let subtotal = 0;
+
+        function toggleOption(type, price) {
+            const checkIcon = document.getElementById(`chkCheck${type}`);
+            const indicator = document.getElementById(`chkBoxIndicator${type}`);
+            const card = document.getElementById(`checkOpt${type}`);
+            const input = document.getElementById(`chk${type}`);
+
+            if (selectedLayanan[type]) {
+                delete selectedLayanan[type];
+                if(checkIcon) checkIcon.classList.add('hidden');
+                if(indicator) {
+                    indicator.classList.remove('bg-sec', 'border-sec');
+                    indicator.classList.add('border-sec/30');
+                }
+                if(card) card.classList.remove('selected');
+                if(input) input.checked = false;
+            } else {
+                selectedLayanan[type] = price;
+                if(checkIcon) checkIcon.classList.remove('hidden');
+                if(indicator) {
+                    indicator.classList.remove('border-sec/30');
+                    indicator.classList.add('bg-sec', 'border-sec');
+                }
+                if(card) card.classList.add('selected');
+                if(input) input.checked = true;
+            }
+            calculateSubtotal();
+        }
+
+        function calculateSubtotal() {
+            subtotal = Object.values(selectedLayanan).reduce((acc, curr) => acc + curr, 0);
+            document.getElementById('checkoutSubtotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
+        }
+
+        function openBooking() {
+            document.getElementById('reservationModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            setStep(1);
+        }
+
+        function closeModal() {
+            document.getElementById('reservationModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function setStep(step) {
+            currentWizardStep = step;
+            
+            // Hide all steps
+            document.getElementById('checkoutStep1').classList.add('hidden');
+            document.getElementById('checkoutStep2').classList.add('hidden');
+            document.getElementById('checkoutStep3').classList.add('hidden');
+            document.getElementById('checkoutStep4').classList.add('hidden');
+            
+            // Show target step
+            document.getElementById(`checkoutStep${step}`).classList.remove('hidden');
+
+            // Update Progress Bar
+            for (let i = 1; i <= 3; i++) {
+                const indicator = document.getElementById(`stepIndicator${i}`);
+                if (indicator) {
+                    if (i <= step) {
+                        indicator.classList.remove('text-sec/40');
+                        indicator.classList.add('text-sec');
+                        indicator.children[0].classList.remove('bg-sec/15', 'text-sec/40');
+                        indicator.children[0].classList.add('bg-sec', 'text-white');
+                    } else {
+                        indicator.classList.add('text-sec/40');
+                        indicator.classList.remove('text-sec');
+                        indicator.children[0].classList.add('bg-sec/15', 'text-sec/40');
+                        indicator.children[0].classList.remove('bg-sec', 'text-white');
+                    }
+                }
+            }
+
+            // Button Control
+            const btnPrev = document.getElementById('btnPrev');
+            const btnNext = document.getElementById('btnNext');
+            const btnSubmit = document.getElementById('btnSubmit');
+
+            if (step === 1) {
+                btnPrev.classList.add('hidden');
+                btnNext.classList.remove('hidden');
+                btnSubmit.classList.add('hidden');
+            } else if (step === 2 || step === 3) {
+                btnPrev.classList.remove('hidden');
+                btnNext.classList.remove('hidden');
+                btnSubmit.classList.add('hidden');
+            } else if (step === 4) {
+                btnPrev.classList.remove('hidden');
+                btnNext.classList.add('hidden');
+                btnSubmit.classList.remove('hidden');
+                generateInvoice();
+            }
+        }
+
+        function nextStep() {
+            if (currentWizardStep === 1) {
+                if (Object.keys(selectedLayanan).length === 0) {
+                    alert("Kakak mohon pilih minimal satu layanan terlebih dahulu.");
+                    return;
+                }
+                setStep(2);
+            } else if (currentWizardStep === 2) {
+                const nama = document.getElementById('custNama').value.trim();
+                const telp = document.getElementById('custTelp').value.trim();
+                const tgl = document.getElementById('custTanggal').value;
+                const jam = document.getElementById('custJam').value;
+
+                if (!nama || !telp || !tgl || !jam) {
+                    alert("Mohon lengkapi Nama, Nomor WhatsApp, Tanggal, dan Slot Sesi Kunjungan Kakak.");
+                    return;
+                }
+                setStep(3);
+            } else if (currentWizardStep === 3) {
+                setStep(4);
+            }
+        }
+
+        function prevStep() {
+            if (currentWizardStep > 1) {
+                setStep(currentWizardStep - 1);
+            }
+        }
+
+        function togglePaymentDetail(method) {
+            const transferDiv = document.getElementById('paymentTransferDetail');
+            const onsiteDiv = document.getElementById('paymentOnsiteDetail');
+            if (method === 'transfer') {
+                if(transferDiv) transferDiv.classList.remove('hidden');
+                if(onsiteDiv) onsiteDiv.classList.add('hidden');
+            } else {
+                if(transferDiv) transferDiv.classList.add('hidden');
+                if(onsiteDiv) onsiteDiv.classList.remove('hidden');
+            }
+        }
+
+        function copyToClipboard(text) {
+            const dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            alert("Nomor rekening berhasil disalin: " + text);
+        }
+
+        function generateInvoice() {
+            const nama = document.getElementById('custNama').value;
+            const telp = document.getElementById('custTelp').value;
+            const tgl = document.getElementById('custTanggal').value;
+            const jam = document.getElementById('custJam').value;
+            const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+
+            document.getElementById('invNama').innerText = nama;
+            document.getElementById('invTelp').innerText = telp;
+            document.getElementById('invJadwal').innerText = `${tgl} | ${jam}`;
+            document.getElementById('invMetode').innerText = paymentMethod;
+
+            const listContainer = document.getElementById('invServicesList');
+            listContainer.innerHTML = '';
+            
+            Object.keys(selectedLayanan).forEach(key => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'flex justify-between items-center';
+                itemDiv.innerHTML = `<span>Akupunktur ${key}</span><span>Rp ${selectedLayanan[key].toLocaleString('id-ID')}</span>`;
+                listContainer.appendChild(itemDiv);
+            });
+
+            document.getElementById('invTotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
+        }
+
+        function submitBooking() {
+            const nama = document.getElementById('custNama').value;
+            const telp = document.getElementById('custTelp').value;
+            const tgl = document.getElementById('custTanggal').value;
+            const jam = document.getElementById('custJam').value;
+            const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+            const layananList = Object.keys(selectedLayanan).map(l => `• Akupunktur ${l}`).join('\n');
+
+            const waText = `Halo Klinik Akupunktur Nina Jombang,\n\nSaya ingin memesan jadwal terapi:\n\n*DATA PASIEN:*\n*Nama:* ${nama}\n*WhatsApp:* ${telp}\n*Tanggal Kunjungan:* ${tgl}\n*Sesi Jam:* ${jam}\n\n*LAYANAN DIPILIH:*\n${layananList}\n\n*PEMBAYARAN:*\n*Total:* Rp ${subtotal.toLocaleString('id-ID')}\n*Metode:* ${paymentMethod}\n\n*Catatan:* Saya memahami bahwa jadwal kunjungan dapat berubah sewaktu-waktu tergantung ketersediaan slot.\n\nMohon konfirmasi ketersediaan slot jadwalnya. Terima kasih.`;
+            
+            // Tujuan WA ke 0822-4575-4145
+            window.open(`https://wa.me/6282245754145?text=${encodeURIComponent(waText)}`, '_blank');
+            closeModal();
+        }
+
+        // =====================================
+        // DETAIL LAYANAN MODAL
+        // =====================================
+        function showServiceDetail(key) {
+            const data = serviceData[key];
+            const content = document.getElementById('serviceContent');
+            document.getElementById('serviceTitle').innerText = data.title;
+            
+            content.innerHTML = `
+                <p class="leading-relaxed text-sec/80">${data.desc}</p>
+                <div class="space-y-4">
+                    <h5 class="font-bold text-sm uppercase tracking-widest text-thr border-b border-thr/10 pb-2">Membantu Keluhan:</h5>
+                    <ul class="grid grid-cols-1 gap-y-3">
+                        ${data.keluhan.map(item => `
+                            <li class="flex items-start gap-3 text-sm bg-pri/50 p-2.5 rounded-lg border border-sec/5">
+                                <i class="fas fa-check-circle text-thr mt-0.5"></i> 
+                                <span class="font-medium">${item}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+                <p class="text-xs font-bold italic text-thr/60 pt-4 text-center bg-thr/5 p-3 rounded-xl">${data.notes}</p>
+            `;
+
+            document.getElementById('serviceModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Bypass button directly to Step 1 checkout pre-selected
+            const btn = document.querySelector('#serviceModal .p-8.pt-0 button');
+            btn.onclick = () => {
+                closeServiceModal();
+                openBooking();
+                
+                // Reset all
+                selectedLayanan = {};
+                ['Kesehatan', 'Kecantikan', 'Facelift', 'Bekam'].forEach(k => {
+                    const checkIcon = document.getElementById(`chkCheck${k}`);
+                    if (checkIcon) checkIcon.classList.add('hidden');
+                    const indicator = document.getElementById(`chkBoxIndicator${k}`);
+                    if (indicator) {
+                        indicator.classList.remove('bg-sec', 'border-sec');
+                        indicator.classList.add('border-sec/30');
+                    }
+                    const optCard = document.getElementById(`checkOpt${k}`);
+                    if (optCard) optCard.classList.remove('selected');
+                    const inputEl = document.getElementById(`chk${k}`);
+                    if (inputEl) inputEl.checked = false;
+                });
+                
+                // Select Current
+                const capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1);
+                toggleOption(capitalizedKey, data.price);
+            };
+        }
+
+        function closeServiceModal() {
+            document.getElementById('serviceModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>
