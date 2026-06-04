@@ -386,20 +386,17 @@
     </footer>
 
     <!-- Modal Detail Layanan -->
-    <div id="serviceModal" class="modal-overlay" onclick="if(event.target === this) closeServiceModal()">
-        <div class="modal-box">
-            <div id="serviceModalHeader" class="bg-sec p-6 text-white flex justify-between items-center shrink-0">
-                <h4 id="serviceTitle" class="text-xl font-bold">Detail Layanan</h4>
-                <button onclick="closeServiceModal()" class="text-white/40 hover:text-white transition-colors cursor-pointer"><i class="fas fa-times text-2xl"></i></button>
-            </div>
-            <div id="serviceContent" class="p-8 space-y-6 text-sec overflow-y-auto">
-                <!-- Content injected by JS -->
-            </div>
-            <div class="p-8 pt-0 shrink-0">
-                <button onclick="closeServiceModal(); openBooking();" class="w-full bg-sec text-white py-4 rounded-2xl font-bold hover:bg-thr transition-all cursor-pointer">Pesan Layanan Ini</button>
-            </div>
+<div id="serviceModal" class="modal-overlay" onclick="if(event.target === this) closeServiceModal()">
+    <div class="modal-box">
+        <div id="serviceModalHeader" class="bg-sec p-6 text-white flex justify-between items-center shrink-0">
+            <h4 id="serviceTitle" class="text-xl font-bold">Detail Layanan</h4>
+            <button onclick="closeServiceModal()" class="text-white/40 hover:text-white transition-colors cursor-pointer"><i class="fas fa-times text-2xl"></i></button>
+        </div>
+        <div id="serviceContent" class="p-8 space-y-6 text-sec overflow-y-auto">
+            <!-- Content injected by JS -->
         </div>
     </div>
+</div>
 
     <!-- MAIN CHECKOUT WIZARD MODAL -->
     <div id="reservationModal" class="modal-overlay" onclick="if(event.target === this) closeModal()">
