@@ -182,71 +182,63 @@
 
     <!-- Layanan Kami -->
     <section id="layanan" class="py-24 bg-white">
-        <div class="container mx-auto px-4 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-20">
-                <h3 class="text-4xl font-bold mb-6 text-sec">Layanan Unggulan Kami</h3>
-                <p class="text-sec/60 text-lg">Kami menyediakan berbagai terapi medis dan kecantikan yang disesuaikan dengan kebutuhan kesehatan Anda.</p>
+    <div class="container mx-auto px-4 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h3 class="text-4xl font-bold mb-6 text-sec">Layanan Unggulan Kami</h3>
+            <p class="text-sec/60 text-lg">Kami menyediakan berbagai terapi medis dan kecantikan yang disesuaikan dengan kebutuhan kesehatan Anda.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div onclick="showServiceDetail('kesehatan')" class="service-card group cursor-pointer bg-pri p-8 rounded-[40px] border border-sec/5 flex flex-col justify-between h-full">
+                <div>
+                    <div class="icon-box mb-6"><i class="fas fa-heartbeat"></i></div>
+                    <h4 class="text-xl font-bold text-sec mb-3">Akupunktur Kesehatan</h4>
+                    <p class="text-sec/60 text-sm leading-relaxed">Terapi medis untuk menyeimbangkan tubuh dan sirkulasi energi melalui titik-titik akupunktur...</p>
+                </div>
+                <span class="text-thr font-bold text-sm mt-6 flex items-center gap-1">LIHAT DETAIL <i class="fas fa-chevron-right text-xs"></i></span>
             </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Kesehatan -->
-                <div onclick="showServiceDetail('kesehatan')" class="service-card group cursor-pointer bg-pri p-8 rounded-[40px] border border-sec/5 flex flex-col justify-between h-full">
-                    <div>
-                        <div class="icon-box">
-                            <i class="fa-solid fa-heart-pulse"></i>
-                        </div>
-                        <h4 class="text-xl font-bold mb-4 text-sec">Akupunktur Kesehatan</h4>
-                        <p class="text-sm text-sec/60 mb-8 leading-relaxed">Terapi medis untuk menyeimbangkan tubuh dan sirkulasi energi melalui titik-titik akupunktur...</p>
-                    </div>
-                    <span class="text-thr font-bold text-sm uppercase tracking-widest flex items-center gap-2 mt-auto">
-                        Lihat Detail <i class="fas fa-chevron-right text-[10px]"></i>
-                    </span>
+            <div onclick="showServiceDetail('estetika')" class="service-card group cursor-pointer bg-pri p-8 rounded-[40px] border border-sec/5 flex flex-col justify-between h-full">
+                <div>
+                    <div class="icon-box mb-6"><i class="fas fa-spa"></i></div>
+                    <h4 class="text-xl font-bold text-sec mb-3">Akupunktur Estetika</h4>
+                    <p class="text-sec/60 text-sm leading-relaxed">Perawatan kulit alami dari dalam untuk merangsang kolagen dan mencerahkan wajah...</p>
                 </div>
-
-                <!-- Kecantikan -->
-                <div onclick="showServiceDetail('kecantikan')" class="service-card group cursor-pointer bg-pri p-8 rounded-[40px] border border-sec/5 flex flex-col justify-between h-full">
-                    <div>
-                        <div class="icon-box">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        </div>
-                        <h4 class="text-xl font-bold mb-4 text-sec">Akupunktur Kecantikan</h4>
-                        <p class="text-sm text-sec/60 mb-8 leading-relaxed">Perawatan kulit alami dari dalam untuk merangsang kolagen dan mencerahkan wajah...</p>
-                    </div>
-                    <span class="text-thr font-bold text-sm uppercase tracking-widest flex items-center gap-2 mt-auto">
-                        Lihat Detail <i class="fas fa-chevron-right text-[10px]"></i>
-                    </span>
+                <span class="text-thr font-bold text-sm mt-6 flex items-center gap-1">LIHAT DETAIL <i class="fas fa-chevron-right text-xs"></i></span>
+            </div>
+            <div onclick="showServiceDetail('slimming')" class="service-card group cursor-pointer bg-pri p-8 rounded-[40px] border border-sec/5 flex flex-col justify-between h-full">
+                <div>
+                    <div class="icon-box mb-6"><i class="fas fa-weight"></i></div>
+                    <h4 class="text-xl font-bold text-sec mb-3">Akupunktur Slimming</h4>
+                    <p class="text-sec/60 text-sm leading-relaxed">Membantu program penurunan berat badan secara alami melalui titik akupunktur metabolisme...</p>
                 </div>
-
-                <!-- Facelift -->
-                <div onclick="showServiceDetail('facelift')" class="service-card group cursor-pointer bg-pri p-8 rounded-[40px] border border-sec/5 flex flex-col justify-between h-full">
-                    <div>
-                        <div class="icon-box">
-                            <i class="fa-solid fa-face-smile-beam"></i>
-                        </div>
-                        <h4 class="text-xl font-bold mb-4 text-sec">Facelift Akupunktur</h4>
-                        <p class="text-sm text-sec/60 mb-8 leading-relaxed">Teknik pengencangan wajah alami tanpa operasi untuk hasil yang lebih kencang dan awet muda...</p>
-                    </div>
-                    <span class="text-thr font-bold text-sm uppercase tracking-widest flex items-center gap-2 mt-auto">
-                        Lihat Detail <i class="fas fa-chevron-right text-[10px]"></i>
-                    </span>
+                <span class="text-thr font-bold text-sm mt-6 flex items-center gap-1">LIHAT DETAIL <i class="fas fa-chevron-right text-xs"></i></span>
+            </div>
+            <div onclick="showServiceDetail('promil')" class="service-card group cursor-pointer bg-pri p-8 rounded-[40px] border border-sec/5 flex flex-col justify-between h-full">
+                <div>
+                    <div class="icon-box mb-6"><i class="fas fa-baby"></i></div>
+                    <h4 class="text-xl font-bold text-sec mb-3">Akupunktur Promil</h4>
+                    <p class="text-sec/60 text-sm leading-relaxed">Mendukung program kehamilan dengan meningkatkan kesuburan secara alami melalui akupunktur...</p>
                 </div>
-
-                <!-- Bekam -->
-                <div onclick="showServiceDetail('bekam')" class="service-card group cursor-pointer bg-pri p-8 rounded-[40px] border border-sec/5 flex flex-col justify-between h-full">
-                    <div>
-                        <div class="icon-box">
-                            <i class="fa-solid fa-fire-burner"></i>
-                        </div>
-                        <h4 class="text-xl font-bold mb-4 text-sec">Bekam Kesehatan</h4>
-                        <p class="text-sm text-sec/60 mb-8 leading-relaxed">Terapi detoksifikasi untuk melancarkan sirkulasi darah dan membuang racun dalam tubuh...</p>
-                    </div>
-                    <span class="text-thr font-bold text-sm uppercase tracking-widest flex items-center gap-2 mt-auto">
-                        Lihat Detail <i class="fas fa-chevron-right text-[10px]"></i>
-                    </span>
+                <span class="text-thr font-bold text-sm mt-6 flex items-center gap-1">LIHAT DETAIL <i class="fas fa-chevron-right text-xs"></i></span>
+            </div>
+            <div onclick="showServiceDetail('stroke')" class="service-card group cursor-pointer bg-pri p-8 rounded-[40px] border border-sec/5 flex flex-col justify-between h-full">
+                <div>
+                    <div class="icon-box mb-6"><i class="fas fa-brain"></i></div>
+                    <h4 class="text-xl font-bold text-sec mb-3">Akupunktur Stroke</h4>
+                    <p class="text-sec/60 text-sm leading-relaxed">Terapi pemulihan pasca stroke untuk membantu mengembalikan fungsi gerak dan saraf...</p>
                 </div>
+                <span class="text-thr font-bold text-sm mt-6 flex items-center gap-1">LIHAT DETAIL <i class="fas fa-chevron-right text-xs"></i></span>
+            </div>
+            <div onclick="showServiceDetail('bekam')" class="service-card group cursor-pointer bg-pri p-8 rounded-[40px] border border-sec/5 flex flex-col justify-between h-full">
+                <div>
+                    <div class="icon-box mb-6"><i class="fas fa-fire"></i></div>
+                    <h4 class="text-xl font-bold text-sec mb-3">Bekam</h4>
+                    <p class="text-sec/60 text-sm leading-relaxed">Terapi tradisional medis untuk detoksifikasi tubuh dan melancarkan sirkulasi darah...</p>
+                </div>
+                <span class="text-thr font-bold text-sm mt-6 flex items-center gap-1">LIHAT DETAIL <i class="fas fa-chevron-right text-xs"></i></span>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 <!-- Profil Terapis -->
 <section id="terapis" class="py-24 bg-pri">
