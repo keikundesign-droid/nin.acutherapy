@@ -855,7 +855,7 @@
             const tgl = document.getElementById('custTanggal').value;
             const jam = document.getElementById('custJam').value;
             const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
-            const layananList = Object.keys(selectedLayanan).map(l => `• Akupunktur ${l}`).join('\n');
+            const layananList = Object.values(selectedLayanan).map(v => `• ${v.name} - Rp ${v.price.toLocaleString('id-ID')}`).join('\n');
 
             const waText = `Halo Klinik Akupunktur Nina Jombang,\n\nSaya ingin memesan jadwal terapi:\n\n*DATA PASIEN:*\n*Nama:* ${nama}\n*WhatsApp:* ${telp}\n*Tanggal Kunjungan:* ${tgl}\n*Sesi Jam:* ${jam}\n\n*LAYANAN DIPILIH:*\n${layananList}\n\n*PEMBAYARAN:*\n*Total:* Rp ${subtotal.toLocaleString('id-ID')}\n*Metode:* ${paymentMethod}\n\n*Catatan:* Saya memahami bahwa jadwal kunjungan dapat berubah sewaktu-waktu tergantung ketersediaan slot.\n\nMohon konfirmasi ketersediaan slot jadwalnya. Terima kasih.`;
             
@@ -868,57 +868,130 @@
         // DETAIL LAYANAN MODAL
         // =====================================
         function showServiceDetail(key) {
-            const data = serviceData[key];
-            const content = document.getElementById('serviceContent');
-            document.getElementById('serviceTitle').innerText = data.title;
-            
-            content.innerHTML = `
-                <p class="leading-relaxed text-sec/80">${data.desc}</p>
-                <div class="space-y-4">
-                    <h5 class="font-bold text-sm uppercase tracking-widest text-thr border-b border-thr/10 pb-2">Membantu Keluhan:</h5>
-                    <ul class="grid grid-cols-1 gap-y-3">
-                        ${data.keluhan.map(item => `
-                            <li class="flex items-start gap-3 text-sm bg-pri/50 p-2.5 rounded-lg border border-sec/5">
-                                <i class="fas fa-check-circle text-thr mt-0.5"></i> 
-                                <span class="font-medium">${item}</span>
-                            </li>
-                        `).join('')}
-                    </ul>
+    const data = serviceData[key];
+    const content = document.getElementById('serviceContent');
+    document.getElementById('serviceTitle').innerText = data.title;
+
+    let itemsHTML = data.items.map(item => `
+        <div class="service-option-checkbox" id="modalOpt${item.id}" onclick="toggleModalItem('${item.id}', ${item.price || 0}, '${item.name}')">
+            <div class="flex items-center gap-3">
+                <div class="w-5 h-5 border-2 border-sec/30 rounded flex items-center justify-center text-white text-xs shrink-0" id="modalBox${item.id}">
+                    <i class="fa-solid fa-check text-[10px] hidden" id="modalCheck${item.id}"></i>
                 </div>
-                <p class="text-xs font-bold italic text-thr/60 pt-4 text-center bg-thr/5 p-3 rounded-xl">${data.notes}</p>
-            `;
+                <span class="text-sm font-semibold text-sec">${item.name}</span>
+            </div>
+            <span class="font-bold text-sm text-thr shrink-0">${item.price ? 'Rp ' + item.price.toLocaleString('id-ID') : 'Hubungi Kami'}</span>
+        </div>
+    `).join('');
 
-            document.getElementById('serviceModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            
-            // Bypass button directly to Step 1 checkout pre-selected
-            const btn = document.querySelector('#serviceModal .p-8.pt-0 button');
-            btn.onclick = () => {
-                closeServiceModal();
-                openBooking();
-                
-                // Reset all
-                selectedLayanan = {};
-                ['Kesehatan', 'Kecantikan', 'Facelift', 'Bekam'].forEach(k => {
-                    const checkIcon = document.getElementById(`chkCheck${k}`);
-                    if (checkIcon) checkIcon.classList.add('hidden');
-                    const indicator = document.getElementById(`chkBoxIndicator${k}`);
-                    if (indicator) {
-                        indicator.classList.remove('bg-sec', 'border-sec');
-                        indicator.classList.add('border-sec/30');
-                    }
-                    const optCard = document.getElementById(`checkOpt${k}`);
-                    if (optCard) optCard.classList.remove('selected');
-                    const inputEl = document.getElementById(`chk${k}`);
-                    if (inputEl) inputEl.checked = false;
-                });
-                
-                // Select Current
-                const capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1);
-                toggleOption(capitalizedKey, data.price);
-            };
+    content.innerHTML = `
+        <p class="text-sec/70 text-sm leading-relaxed">${data.desc}</p>
+        <div>
+            <h5 class="text-xs font-bold uppercase tracking-widest text-thr mb-3">Cocok untuk keluhan:</h5>
+            <ul class="space-y-1.5">
+                ${data.keluhan.map(k => `<li class="flex items-start gap-2 text-sm text-sec/70"><i class="fas fa-circle-check text-thr mt-0.5 shrink-0 text-xs"></i>${k}</li>`).join('')}
+            </ul>
+        </div>
+        <div class="h-px bg-sec/10"></div>
+        <div>
+            <h5 class="text-xs font-bold uppercase tracking-widest text-thr mb-3">Pilih Layanan:</h5>
+            <div class="space-y-2">${itemsHTML}</div>
+        </div>
+        <p class="text-xs text-sec/40 italic">${data.notes}</p>
+        <div class="bg-pri p-4 rounded-xl border border-sec/5 flex justify-between items-center">
+            <span class="text-sm font-semibold text-sec/70">Subtotal:</span>
+            <span class="text-lg font-extrabold text-sec" id="modalSubtotal">Rp 0</span>
+        </div>
+        <button onclick="proceedToBookingFromModal()" class="w-full bg-sec text-white py-4 rounded-2xl font-bold hover:bg-thr transition-all cursor-pointer">Pesan Layanan Ini →</button>
+    `;
+
+    // Restore state jika item sudah dipilih sebelumnya
+    Object.keys(selectedLayanan).forEach(id => {
+        const box = document.getElementById(`modalBox${id}`);
+        const check = document.getElementById(`modalCheck${id}`);
+        const card = document.getElementById(`modalOpt${id}`);
+        if (box && check && card) {
+            check.classList.remove('hidden');
+            box.classList.add('bg-sec', 'border-sec');
+            box.classList.remove('border-sec/30');
+            card.classList.add('selected');
         }
+    });
+    updateModalSubtotal();
 
+    document.getElementById('serviceModal').style.display = 'flex';
+}
+
+function toggleModalItem(id, price, name) {
+    const check = document.getElementById(`modalCheck${id}`);
+    const box = document.getElementById(`modalBox${id}`);
+    const card = document.getElementById(`modalOpt${id}`);
+    if (selectedLayanan[id]) {
+        delete selectedLayanan[id];
+        check.classList.add('hidden');
+        box.classList.remove('bg-sec', 'border-sec');
+        box.classList.add('border-sec/30');
+        card.classList.remove('selected');
+    } else {
+        if (price > 0) {
+            selectedLayanan[id] = { price, name };
+        }
+        check.classList.remove('hidden');
+        box.classList.remove('border-sec/30');
+        box.classList.add('bg-sec', 'border-sec');
+        card.classList.add('selected');
+    }
+    updateModalSubtotal();
+}
+
+function updateModalSubtotal() {
+    const total = Object.values(selectedLayanan).reduce((acc, v) => acc + v.price, 0);
+    const el = document.getElementById('modalSubtotal');
+    if (el) el.innerText = `Rp ${total.toLocaleString('id-ID')}`;
+}
+
+function proceedToBookingFromModal() {
+    closeServiceModal();
+    openBooking();
+}
+
+function openBooking() {
+    // Render dynamic list
+    const list = document.getElementById('dynamicServiceList');
+    if (list) {
+        list.innerHTML = Object.keys(selectedLayanan).length === 0
+            ? '<p class="text-sm text-sec/50 italic">Belum ada layanan dipilih. Silakan klik kartu layanan terlebih dahulu.</p>'
+            : Object.entries(selectedLayanan).map(([id, v]) => `
+                <div class="service-option-checkbox selected" id="checkOpt${id}" onclick="toggleBookingItem('${id}')">
+                    <div class="flex items-center gap-3">
+                        <div class="w-5 h-5 border-2 bg-sec border-sec rounded flex items-center justify-center text-white text-xs shrink-0">
+                            <i class="fa-solid fa-check text-[10px]"></i>
+                        </div>
+                        <span class="text-sm font-semibold text-sec">${v.name}</span>
+                    </div>
+                    <span class="font-bold text-sm text-thr shrink-0">Rp ${v.price.toLocaleString('id-ID')}</span>
+                </div>
+            `).join('');
+    }
+    calculateSubtotal();
+    document.getElementById('reservationModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    setStep(1);
+}
+
+function toggleBookingItem(id) {
+    if (selectedLayanan[id]) {
+        delete selectedLayanan[id];
+        const card = document.getElementById(`checkOpt${id}`);
+        if (card) card.remove();
+    }
+    calculateSubtotal();
+}
+
+function calculateSubtotal() {
+    subtotal = Object.values(selectedLayanan).reduce((acc, v) => acc + v.price, 0);
+    document.getElementById('checkoutSubtotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
+}
         function closeServiceModal() {
             document.getElementById('serviceModal').style.display = 'none';
             document.body.style.overflow = 'auto';
