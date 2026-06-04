@@ -639,57 +639,82 @@
     <script>
         // Data Rincian Layanan & Tarif
         const serviceData = {
-            kesehatan: {
-                title: "Akupunktur Kesehatan",
-                price: 150000,
-                desc: "Terapi akupunktur medis untuk menyeimbangkan tubuh, meningkatkan sirkulasi energi, dan mendukung pemulihan alami.",
-                keluhan: [
-                    "Nyeri otot & sendi (lutut, bahu, pinggang)",
-                    "Keluhan saraf (kesemutan, kebas/baal)",
-                    "Pemulihan post stroke",
-                    "Sakit kepala, migrain, vertigo",
-                    "Gangguan tidur / insomnia",
-                    "Bell's palsy",
-                    "Gangguan pencernaan"
-                ],
-                notes: "*aman, steril, profesional"
-            },
-            kecantikan: {
-                title: "Akupunktur Kecantikan",
-                price: 175000,
-                desc: "Perawatan kecantikan alami dengan teknik akupunktur untuk membantu memperbaiki penampilan kulit dari dalam. Membantu melancarkan sirkulasi darah, merangsang produksi kolagen, serta merangsang regenerasi kulit secara alami.",
-                keluhan: [
-                    "Kulit kusam & tidak bercahaya",
-                    "Garis halus & kerutan",
-                    "Kulit kendur/kurang kencang",
-                    "Jerawat & bekas jerawat/bopeng",
-                    "Pori-pori tampak besar"
-                ],
-                notes: "*alami, non bedah, tanpa bahan kimia"
-            },
-            facelift: {
-                title: "Facelift Akupunktur",
-                price: 200000,
-                desc: "Perawatan wajah alami dengan teknik akupunktur untuk membantu mengencangkan kulit, meningkatkan elastisitas, melancarkan sirkulasi darah, dan merangsang produksi kolagen.",
-                keluhan: [
-                    "Wajah tampak lelah",
-                    "Garis halus penuaan",
-                    "Kulit wajah kendur",
-                    "Sirkulasi wajah tidak lancar"
-                ],
-                notes: "*tanpa operasi & tanpa bahan kimia"
-            },
-            bekam: {
-                title: "Bekam Kesehatan",
-                price: 120000,
-                desc: "Terapi tradisional medis untuk membantu detoksifikasi tubuh, melancarkan sirkulasi darah, dan menjaga keseimbangan kesehatan secara menyeluruh.",
-                keluhan: [
-                    "Pegal & nyeri otot",
-                    "Masuk angin & kelelahan"
-                ],
-                notes: "*aman higienis, profesional"
-            }
-        };
+    kesehatan: {
+        title: "Akupunktur Kesehatan",
+        desc: "Terapi akupunktur medis untuk menyeimbangkan tubuh, meningkatkan sirkulasi energi, dan mendukung pemulihan alami. Cocok untuk berbagai keluhan kesehatan umum.",
+        keluhan: ["Nyeri otot & sendi (lutut, bahu, pinggang)", "Keluhan saraf (kesemutan, kebas/baal)", "Pemulihan post stroke", "Sakit kepala, migrain, vertigo", "Gangguan tidur / insomnia", "Bell's palsy", "Gangguan pencernaan"],
+        notes: "*aman, steril, profesional",
+        items: [
+            { id: "AK1", name: "Akupunktur Kesehatan TCM", price: 85000 },
+            { id: "AK2", name: "Akupunktur Kesehatan + ER + IR", price: 100000 },
+            { id: "AK3", name: "Akupunktur Depan Belakang", price: 150000 },
+            { id: "AK4", name: "Paket Akupunktur Kesehatan 6x", price: 540000 },
+            { id: "AK5", name: "Paket Akupunktur Kesehatan 12x", price: null },
+        ]
+    },
+    estetika: {
+        title: "Akupunktur Estetika",
+        desc: "Perawatan kecantikan alami dengan teknik akupunktur untuk memperbaiki penampilan kulit dari dalam. Melancarkan sirkulasi darah, merangsang produksi kolagen, dan regenerasi kulit secara alami.",
+        keluhan: ["Kulit kusam & tidak bercahaya", "Garis halus & kerutan", "Kulit kendur/kurang kencang", "Jerawat & bekas jerawat/bopeng", "Pori-pori tampak besar"],
+        notes: "*alami, non bedah, tanpa bahan kimia",
+        items: [
+            { id: "AE1", name: "Akupunktur 10 Jarum + Facial", price: 125000 },
+            { id: "AE2", name: "Akupunktur 20 Jarum + Facial", price: 150000 },
+            { id: "AE3", name: "Akupunktur Acne + Facial", price: 150000 },
+            { id: "AE4", name: "Akupunktur Facelift", price: 150000 },
+            { id: "AE5", name: "Akupunktur Facelift Acne + Facial", price: 200000 },
+            { id: "AE6", name: "Akupunktur Facelift + Facial", price: 200000 },
+        ]
+    },
+    slimming: {
+        title: "Akupunktur Slimming",
+        desc: "Program penurunan berat badan secara alami melalui stimulasi titik akupunktur yang berhubungan dengan metabolisme, nafsu makan, dan pembakaran lemak tubuh.",
+        keluhan: ["Berat badan berlebih", "Metabolisme lambat", "Lemak menumpuk di perut & pinggul", "Nafsu makan sulit dikendalikan"],
+        notes: "*alami, tanpa obat kimia, aman",
+        items: [
+            { id: "AS1", name: "Akupunktur Slimming", price: 100000 },
+            { id: "AS2", name: "Akupunktur Slimming + Bekam", price: 200000 },
+            { id: "AS3", name: "Paket Akupunktur Slimming 6x", price: 550000 },
+            { id: "AS4", name: "Paket Akupunktur Slimming 6x + Herbal", price: 679000 },
+            { id: "AS5", name: "Paket Slimming 10x Gratis 1x", price: 1000000 },
+            { id: "AS6", name: "Paket Slimming 10x Gratis 1x + Herbal", price: 1129000 },
+        ]
+    },
+    promil: {
+        title: "Akupunktur Promil",
+        desc: "Mendukung program kehamilan dengan meningkatkan kesuburan secara alami. Akupunktur promil membantu melancarkan sirkulasi darah ke organ reproduksi dan menyeimbangkan hormon.",
+        keluhan: ["Siklus haid tidak teratur", "Gangguan kesuburan", "Program hamil (suami & istri)", "Keseimbangan hormon"],
+        notes: "*aman, alami, mendukung program medis",
+        items: [
+            { id: "AP1", name: "Akupunktur Promil", price: 120000 },
+            { id: "AP2", name: "Paket Akupunktur Promil 12x", price: 1400000 },
+            { id: "AP3", name: "Paket Promil Suami Istri 12x", price: 2800000 },
+        ]
+    },
+    stroke: {
+        title: "Akupunktur Stroke",
+        desc: "Terapi pemulihan pasca stroke untuk membantu mengembalikan fungsi gerak, bicara, dan saraf. Dilakukan secara rutin untuk hasil optimal.",
+        keluhan: ["Kelemahan anggota gerak", "Gangguan bicara pasca stroke", "Kesemutan & kebas berkepanjangan", "Pemulihan fungsi motorik"],
+        notes: "*terapi pendamping, konsultasikan dengan dokter",
+        items: [
+            { id: "AST1", name: "Akupunktur Stroke", price: 150000 },
+            { id: "AST2", name: "Paket Akupunktur Stroke 12x Free 1x", price: 1500000 },
+        ]
+    },
+    bekam: {
+        title: "Bekam",
+        desc: "Terapi tradisional medis untuk membantu detoksifikasi tubuh, melancarkan sirkulasi darah, dan menjaga keseimbangan kesehatan secara menyeluruh.",
+        keluhan: ["Pegal & nyeri otot", "Masuk angin & kelelahan", "Darah kotor / toksin tubuh", "Imunitas menurun"],
+        notes: "*aman, higienis, profesional",
+        items: [
+            { id: "BK1", name: "Bekam Kering", price: 75000 },
+            { id: "BK2", name: "Bekam Api", price: 100000 },
+            { id: "BK3", name: "Bekam Kering + Basah Full Body", price: 130000 },
+            { id: "BK4", name: "Bekam + Akupunktur Kesehatan", price: 150000 },
+            { id: "BK5", name: "Bekam Full + Akupunktur Kesehatan", price: 200000 },
+        ]
+    }
+};
 
         // Slider Image Logic
         let currentSlide = 0;
