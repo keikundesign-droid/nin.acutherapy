@@ -1011,7 +1011,35 @@ function openBooking() {
     const list = document.getElementById('dynamicServiceList');
     if (list) {
         list.innerHTML = Object.keys(selectedLayanan).length === 0
-            ? '<p class="text-sm text-sec/50 italic">Belum ada layanan dipilih. Silakan klik kartu layanan terlebih dahulu.</p>'
+            ? `<div class="space-y-3">
+    <p class="text-sm text-sec/60 italic mb-3">Belum ada layanan dipilih. Pilih kategori layanan:</p>
+    <div class="grid grid-cols-2 gap-2">
+        <button onclick="closeModal(); setTimeout(() => showServiceDetail('kesehatan'), 150)" class="bg-pri border border-sec/10 rounded-2xl p-3 text-left hover:border-thr transition-all cursor-pointer">
+            <i class="fas fa-heartbeat text-thr text-sm mb-1 block"></i>
+            <span class="text-xs font-bold text-sec block">Akupunktur Kesehatan</span>
+        </button>
+        <button onclick="closeModal(); setTimeout(() => showServiceDetail('estetika'), 150)" class="bg-pri border border-sec/10 rounded-2xl p-3 text-left hover:border-thr transition-all cursor-pointer">
+            <i class="fas fa-spa text-thr text-sm mb-1 block"></i>
+            <span class="text-xs font-bold text-sec block">Akupunktur Estetika</span>
+        </button>
+        <button onclick="closeModal(); setTimeout(() => showServiceDetail('slimming'), 150)" class="bg-pri border border-sec/10 rounded-2xl p-3 text-left hover:border-thr transition-all cursor-pointer">
+            <i class="fas fa-weight text-thr text-sm mb-1 block"></i>
+            <span class="text-xs font-bold text-sec block">Akupunktur Slimming</span>
+        </button>
+        <button onclick="closeModal(); setTimeout(() => showServiceDetail('promil'), 150)" class="bg-pri border border-sec/10 rounded-2xl p-3 text-left hover:border-thr transition-all cursor-pointer">
+            <i class="fas fa-baby text-thr text-sm mb-1 block"></i>
+            <span class="text-xs font-bold text-sec block">Akupunktur Promil</span>
+        </button>
+        <button onclick="closeModal(); setTimeout(() => showServiceDetail('stroke'), 150)" class="bg-pri border border-sec/10 rounded-2xl p-3 text-left hover:border-thr transition-all cursor-pointer">
+            <i class="fas fa-brain text-thr text-sm mb-1 block"></i>
+            <span class="text-xs font-bold text-sec block">Akupunktur Stroke</span>
+        </button>
+        <button onclick="closeModal(); setTimeout(() => showServiceDetail('bekam'), 150)" class="bg-pri border border-sec/10 rounded-2xl p-3 text-left hover:border-thr transition-all cursor-pointer">
+            <i class="fas fa-fire text-thr text-sm mb-1 block"></i>
+            <span class="text-xs font-bold text-sec block">Bekam</span>
+        </button>
+    </div>
+</div>`
             : Object.entries(selectedLayanan).map(([id, v]) => `
                 <div class="service-option-checkbox selected" id="checkOpt${id}" onclick="toggleBookingItem('${id}')">
                     <div class="flex items-center gap-3">
