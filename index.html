@@ -886,7 +886,7 @@
             Object.keys(selectedLayanan).forEach(key => {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'flex justify-between items-center';
-                itemDiv.innerHTML = `<span>Akupunktur ${key}</span><span>Rp ${selectedLayanan[key].toLocaleString('id-ID')}</span>`;
+                itemDiv.innerHTML = `<span>${selectedLayanan[key].name}</span><span>Rp ${selectedLayanan[key].price.toLocaleString('id-ID')}</span>`;
                 listContainer.appendChild(itemDiv);
             });
 
