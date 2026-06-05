@@ -463,7 +463,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-bold text-sec/60 uppercase mb-2">Pilih Tanggal</label>
-                                <input type="date" id="custTanggal" class="w-full border border-sec/15 rounded-xl px-4 py-3 bg-pri/20 focus:outline-none focus:border-thr text-sec">
+                                <input type="date" id="custTanggal" onchange="validateTanggal(this)" class="w-full border border-sec/15 rounded-xl px-4 py-3 bg-pri/20 focus:outline-none focus:border-thr text-sec">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-sec/60 uppercase mb-2">Pilih Slot Sesi / Jam</label>
@@ -1004,6 +1004,14 @@ function calculateSubtotal() {
             document.getElementById('serviceModal').style.display = 'none';
             document.body.style.overflow = 'auto';
         }
+function validateTanggal(input) {
+    const date = new Date(input.value);
+    const day = date.getUTCDay(); // 0 = Minggu
+    if (day === 0) {
+        alert('Maaf, klinik tutup di hari Minggu. Silakan pilih hari lain.');
+        input.value = '';
+    }
+}
     </script>
 </body>
 </html>
