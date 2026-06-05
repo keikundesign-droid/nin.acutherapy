@@ -498,45 +498,82 @@
                 </div>
 
                 <!-- STEP 3: PEMBAYARAN -->
-                <div id="checkoutStep3" class="space-y-4 hidden">
-                    <h5 class="text-sm font-bold text-sec uppercase tracking-widest mb-1">Pilih Metode Pembayaran</h5>
-                    <p class="text-xs text-sec/60">Tentukan cara pembayaran untuk pesanan terapi Kakak.</p>
-                    
-                    <div class="space-y-4">
-                        <!-- BCA -->
-                        <div class="border border-sec/10 rounded-2xl p-4 bg-white space-y-3">
-                            <label class="flex items-center gap-3 cursor-pointer">
-                                <input type="radio" name="payment_method" value="Transfer Bank BCA" checked onclick="togglePaymentDetail('transfer')" class="w-4 h-4 accent-sec">
-                                <span class="text-sm font-bold text-sec">Transfer Bank BCA (Cepat)</span>
-                            </label>
-                            
-                            <div id="paymentTransferDetail" class="pl-7 pt-2 space-y-3 border-t border-sec/5 text-xs text-sec/80">
-                                <p>Lakukan transfer sesuai total pemesanan ke rekening berikut:</p>
-                                <div class="bg-pri p-3.5 rounded-xl border border-sec/5">
-                                    <div class="flex justify-between items-start">
-                                        <div>
-                                            <span class="block font-bold text-sec">Bank BCA</span>
-                                            <span class="text-sm font-mono font-bold text-sec">1131834964</span>
-                                            <span class="block text-[10px] text-thr font-bold italic mt-0.5">a.n. NISRINA LAM'A</span>
-                                        </div>
-                                        <button onclick="copyToClipboard('1131834964')" class="bg-sec text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-bold hover:bg-thr cursor-pointer transition-colors shadow-sm">Salin</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<div id="checkoutStep3" class="space-y-4 hidden">
+    <h5 class="text-sm font-bold text-sec uppercase tracking-widest mb-1">Pilih Metode Pembayaran</h5>
+    <p class="text-xs text-sec/60">Tentukan cara pembayaran untuk pesanan terapi Kakak.</p>
 
-                        <!-- Klinik -->
-                        <div class="border border-sec/10 rounded-2xl p-4 bg-white">
-                            <label class="flex items-center gap-3 cursor-pointer">
-                                <input type="radio" name="payment_method" value="Bayar di Tempat (Klinik)" onclick="togglePaymentDetail('onsite')" class="w-4 h-4 accent-sec">
-                                <span class="text-sm font-bold text-sec">Bayar di Tempat (Klinik)</span>
-                            </label>
-                            <p id="paymentOnsiteDetail" class="hidden pl-7 pt-2 text-xs text-sec/60 border-t border-sec/5 mt-3">
-                                Kakak dapat melakukan pembayaran langsung secara Tunai/Transfer setelah selesai melakukan terapi di klinik.
-                            </p>
+    <div class="space-y-4">
+        <!-- BCA -->
+        <div class="border border-sec/10 rounded-2xl p-4 bg-white space-y-3">
+            <label class="flex items-center gap-3 cursor-pointer">
+                <input type="radio" name="payment_method" value="Transfer Bank BCA" checked onclick="togglePaymentDetail('transfer')" class="w-4 h-4 accent-sec">
+                <span class="text-sm font-bold text-sec">Transfer Bank BCA (Cepat)</span>
+            </label>
+            <div id="paymentTransferDetail" class="pl-7 pt-2 space-y-3 border-t border-sec/5 text-xs text-sec/80">
+                <p>Lakukan transfer sesuai total pemesanan ke rekening berikut:</p>
+                <div class="bg-pri p-3.5 rounded-xl border border-sec/5">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="block font-bold text-sec">Bank BCA</span>
+                            <span class="text-sm font-mono font-bold text-sec">1131834964</span>
+                            <span class="block text-[10px] text-thr font-bold italic mt-0.5">a.n. NISRINA LAM'A</span>
                         </div>
+                        <button onclick="copyToClipboard('1131834964')" class="bg-sec text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-bold hover:bg-thr">SALIN</button>
                     </div>
                 </div>
+                <p class="text-thr font-semibold">* Sertakan bukti pembayaran saat konfirmasi via WhatsApp.</p>
+            </div>
+        </div>
+
+        <!-- DANA -->
+        <div class="border border-sec/10 rounded-2xl p-4 bg-white space-y-3">
+            <label class="flex items-center gap-3 cursor-pointer">
+                <input type="radio" name="payment_method" value="Transfer DANA" onclick="togglePaymentDetail('dana')" class="w-4 h-4 accent-sec">
+                <span class="text-sm font-bold text-sec">DANA</span>
+            </label>
+            <div id="paymentDanaDetail" class="hidden pl-7 pt-2 space-y-3 border-t border-sec/5 text-xs text-sec/80">
+                <p>Lakukan transfer sesuai total pemesanan ke nomor DANA berikut:</p>
+                <div class="bg-pri p-3.5 rounded-xl border border-sec/5">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="block font-bold text-sec">DANA</span>
+                            <span class="text-sm font-mono font-bold text-sec">0822-4575-4145</span>
+                            <span class="block text-[10px] text-thr font-bold italic mt-0.5">a.n. NISRINA LAM'A</span>
+                        </div>
+                        <button onclick="copyToClipboard('082245754145')" class="bg-sec text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-bold hover:bg-thr">SALIN</button>
+                    </div>
+                </div>
+                <p class="text-thr font-semibold">* Sertakan bukti pembayaran saat konfirmasi via WhatsApp.</p>
+            </div>
+        </div>
+
+        <!-- QRIS -->
+        <div class="border border-sec/10 rounded-2xl p-4 bg-white space-y-3">
+            <label class="flex items-center gap-3 cursor-pointer">
+                <input type="radio" name="payment_method" value="QRIS" onclick="togglePaymentDetail('qris')" class="w-4 h-4 accent-sec">
+                <span class="text-sm font-bold text-sec">QRIS</span>
+            </label>
+            <div id="paymentQrisDetail" class="hidden pl-7 pt-2 space-y-3 border-t border-sec/5 text-xs text-sec/80">
+                <p>Scan QR Code berikut menggunakan aplikasi pembayaran apapun:</p>
+                <div class="flex justify-center">
+                    <img src="https://raw.githubusercontent.com/keikundesign-droid/nin.acutherapy/main/qris.jpeg" alt="QRIS Akupunktur Nina Jombang" class="w-48 h-48 object-contain rounded-xl border border-sec/10">
+                </div>
+                <p class="text-thr font-semibold">* Sertakan bukti pembayaran saat konfirmasi via WhatsApp.</p>
+            </div>
+        </div>
+
+        <!-- Bayar di Tempat -->
+        <div class="border border-sec/10 rounded-2xl p-4 bg-white space-y-3">
+            <label class="flex items-center gap-3 cursor-pointer">
+                <input type="radio" name="payment_method" value="Bayar di Tempat (Klinik)" onclick="togglePaymentDetail('onsite')" class="w-4 h-4 accent-sec">
+                <span class="text-sm font-bold text-sec">Bayar di Tempat (Klinik)</span>
+            </label>
+            <p id="paymentOnsiteDetail" class="hidden pl-7 pt-2 text-xs text-sec/60 border-t border-sec/5 mt-3">
+                Kakak dapat melakukan pembayaran langsung secara Tunai/Transfer setelah selesai melakukan terapi di klinik.
+            </p>
+        </div>
+    </div>
+</div>
 
                 <!-- STEP 4: RINGKASAN -->
                 <div id="checkoutStep4" class="space-y-4 hidden">
@@ -810,18 +847,17 @@
             }
         }
 
-        function togglePaymentDetail(method) {
-            const transferDiv = document.getElementById('paymentTransferDetail');
-            const onsiteDiv = document.getElementById('paymentOnsiteDetail');
-            if (method === 'transfer') {
-                if(transferDiv) transferDiv.classList.remove('hidden');
-                if(onsiteDiv) onsiteDiv.classList.add('hidden');
-            } else {
-                if(transferDiv) transferDiv.classList.add('hidden');
-                if(onsiteDiv) onsiteDiv.classList.remove('hidden');
-            }
-        }
-
+        function togglePaymentDetail(type) {
+    document.getElementById('paymentTransferDetail').classList.add('hidden');
+    document.getElementById('paymentDanaDetail').classList.add('hidden');
+    document.getElementById('paymentQrisDetail').classList.add('hidden');
+    document.getElementById('paymentOnsiteDetail').classList.add('hidden');
+    
+    if (type === 'transfer') document.getElementById('paymentTransferDetail').classList.remove('hidden');
+    if (type === 'dana') document.getElementById('paymentDanaDetail').classList.remove('hidden');
+    if (type === 'qris') document.getElementById('paymentQrisDetail').classList.remove('hidden');
+    if (type === 'onsite') document.getElementById('paymentOnsiteDetail').classList.remove('hidden');
+}
         function copyToClipboard(text) {
             const dummy = document.createElement("textarea");
             document.body.appendChild(dummy);
