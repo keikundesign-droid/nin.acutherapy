@@ -390,7 +390,7 @@
     <div class="modal-box">
         <div id="serviceModalHeader" class="bg-sec p-6 text-white flex justify-between items-center shrink-0">
             <h4 id="serviceTitle" class="text-xl font-bold">Detail Layanan</h4>
-            <button onclick="closeServiceModal(); showServiceDetail(getNextService('${key}'))" class="w-full border-2 border-sec/20 text-sec py-4 rounded-2xl font-bold hover:bg-sec/5 transition-all cursor-pointer">+ Tambah Layanan Lain</button>
+            <button onclick="closeServiceModal(); setTimeout(() => showServiceDetail(getNextService('${key}')), 100)" class="w-full border-2 border-sec/20 text-sec py-4 rounded-2xl font-bold hover:bg-sec/5 transition-all cursor-pointer">+ Tambah Layanan Lain</button>
         </div>
         <div id="serviceContent" class="p-8 space-y-6 text-sec overflow-y-auto">
             <!-- Content injected by JS -->
