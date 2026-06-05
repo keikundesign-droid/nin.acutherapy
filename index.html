@@ -390,7 +390,7 @@
     <div class="modal-box">
         <div id="serviceModalHeader" class="bg-sec p-6 text-white flex justify-between items-center shrink-0">
             <h4 id="serviceTitle" class="text-xl font-bold">Detail Layanan</h4>
-            <button onclick="closeServiceModal()" class="text-white/40 hover:text-white transition-colors cursor-pointer"><i class="fas fa-times text-2xl"></i></button>
+            <button onclick="closeServiceModal(); showServiceDetail(getNextService('${key}'))" class="w-full border-2 border-sec/20 text-sec py-4 rounded-2xl font-bold hover:bg-sec/5 transition-all cursor-pointer">+ Tambah Layanan Lain</button>
         </div>
         <div id="serviceContent" class="p-8 space-y-6 text-sec overflow-y-auto">
             <!-- Content injected by JS -->
@@ -1014,6 +1014,11 @@ function validateTanggal(input) {
         alert('Maaf, klinik tutup di hari Minggu.\n\nPemesanan pada hari libur dapat dilayani selama telah melakukan reservasi sebelumnya.');
         input.value = '';
     }
+}
+function getNextService(current) {
+    const urutan = ['kesehatan', 'estetika', 'slimming', 'promil', 'stroke', 'bekam'];
+    const index = urutan.indexOf(current);
+    return urutan[(index + 1) % urutan.length];
 }
     </script>
 </body>
