@@ -752,7 +752,7 @@
         }
 
         function calculateSubtotal() {
-            subtotal = Object.values(selectedLayanan).reduce((acc, curr) => acc + curr, 0);
+            subtotal = Object.values(selectedLayanan).reduce((acc, v) => acc + (typeof v === 'object' ? v.price : v), 0);
             document.getElementById('checkoutSubtotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
         }
 
@@ -886,7 +886,10 @@
             Object.keys(selectedLayanan).forEach(key => {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'flex justify-between items-center';
-                itemDiv.innerHTML = `<span>${selectedLayanan[key].name}</span><span>Rp ${selectedLayanan[key].price.toLocaleString('id-ID')}</span>`;
+                const item = selectedLayanan[key];
+const itemName = typeof item === 'object' ? item.name : key;
+const itemPrice = typeof item === 'object' ? item.price : item;
+itemDiv.innerHTML = `<span>${itemName}</span><span>Rp ${itemPrice.toLocaleString('id-ID')}</span>`;
                 listContainer.appendChild(itemDiv);
             });
 
@@ -1037,7 +1040,7 @@ function toggleBookingItem(id) {
 }
 
 function calculateSubtotal() {
-    subtotal = Object.values(selectedLayanan).reduce((acc, v) => acc + v.price, 0);
+    subtotal = Object.values(selectedLayanan).reduce((acc, v) => acc + (typeof v === 'object' ? v.price : v), 0);
     document.getElementById('checkoutSubtotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
 }
         function closeServiceModal() {
