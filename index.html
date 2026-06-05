@@ -1008,7 +1008,7 @@ function validateTanggal(input) {
     const date = new Date(input.value);
     const day = date.getUTCDay(); // 0 = Minggu
     if (day === 0) {
-        alert('Maaf, klinik tutup di hari Minggu. Silakan pilih hari lain.');
+        alert('Maaf, klinik tutup di hari Minggu.\n\nPemesanan pada hari libur dapat dilayani selama telah melakukan reservasi sebelumnya.');
         input.value = '';
     }
 }
